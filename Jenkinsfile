@@ -16,7 +16,7 @@ pipeline {
 
         stage('Run Pytest Inside Docker') {
             steps {
-                sh 'docker run --rm ai-chat-demo pytest tests/'
+                sh 'docker run --rm -e OPENAI_API_KEY=dummy-key ai-chat-demo pytest tests/'
             }
         }
     }
