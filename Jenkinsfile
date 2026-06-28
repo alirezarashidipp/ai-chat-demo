@@ -16,21 +16,15 @@ pipeline {
             }
         }
 
-        stage('Install Dependencies') {
-            steps {
-                sh 'python3 -m pip install -r backend/requirements.txt'
-            }
-        }
-
-        stage('Run Tests') {
-            steps {
-                sh 'pytest'
-            }
-        }
-
         stage('Docker Build') {
             steps {
                 sh 'docker build -t ai-chat-demo .'
+            }
+        }
+
+        stage('Run Tests In Docker') {
+            steps {
+                sh 'docker run --rm ai-chat-demo pytest'
             }
         }
     }
