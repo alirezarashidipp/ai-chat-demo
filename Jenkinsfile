@@ -14,7 +14,7 @@ pipeline {
             }
         }
 
-        stage('Run Tests In Docker') {
+        stage('Run Pytest Inside Docker') {
             steps {
                 sh 'docker run --rm ai-chat-demo pytest tests/'
             }
