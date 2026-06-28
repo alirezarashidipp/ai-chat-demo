@@ -8,21 +8,29 @@ pipeline {
             }
         }
 
+        stage('Show Environment') {
+            steps {
+                sh 'uname -a'
+                sh 'pwd'
+                sh 'ls -la'
+            }
+        }
+
         stage('Install Dependencies') {
             steps {
-                bat 'python -m pip install -r backend\\requirements.txt'
+                sh 'python3 -m pip install -r backend/requirements.txt'
             }
         }
 
         stage('Run Tests') {
             steps {
-                bat 'pytest'
+                sh 'pytest'
             }
         }
 
         stage('Docker Build') {
             steps {
-                bat 'docker build -t ai-chat-demo .'
+                sh 'docker build -t ai-chat-demo .'
             }
         }
     }
