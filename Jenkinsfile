@@ -8,13 +8,15 @@ pipeline {
             }
         }
 
-        stage('Run Tests') {
+        stage('Docker Build') {
             steps {
-                sh '''
-                    python3 --version || true
-                    pip3 --version || true
-                    echo "Jenkins simple pipeline is running"
-                '''
+                sh 'docker build -t ai-chat-demo .'
+            }
+        }
+
+        stage('Run Tests In Docker') {
+            steps {
+                sh 'docker run --rm ai-chat-demo pytest tests/'
             }
         }
     }
